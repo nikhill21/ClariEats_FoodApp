@@ -1,0 +1,29 @@
+<div>
+    <form #regForm="ngForm" (ngSubmit)="register(regForm)" class="form-signin"
+        style="max-width: 45%; margin: 0vh auto 0px; display: flex; flex-direction: column;">
+        <br>
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal" style="text-align: center;">Sign Up</h1>
+
+        <label for="inputEmail" class="sr-only">Name</label>
+        <input name="name" #name="ngModel" ngModel type="email" id="inputEmail" class="form-control" placeholder="Name"
+            required>
+        <span *ngIf="name.invalid && name.touched" style="color: red;">Name required</span>
+        <label for="inputEmail" class="sr-only">Email</label>
+        <input name="email" #email="ngModel" ngModel type="email" id="inputEmail" class="form-control"
+            placeholder="Email address" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" required>
+        <span *ngIf="email.invalid && email.touched" style="color: red;">Invalid email</span>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input name="password" #password="ngModel" ngModel type="password" id="inputPassword" class="form-control"
+            placeholder="Password" required>
+        <span *ngIf="password.invalid && password.touched" style="color: red;">Password required</span>
+        <select style="margin-bottom: 10px;margin-left: 10px; display: none;" class="form-control" name="role" #role="ngModel" ngModel>
+            <!-- <option value="" disabled selected><small>Select role</small></option>
+            <option selected>{{createUser}}</option>
+            <option *ngIf= "role === 'Manager'">Staff</option>
+            <option *ngIf="role == 'Admin'">Admin</option> -->
+        </select>
+        <button style="margin-left: 10px;" [disabled]="!regForm.valid" class="btn btn-primary btn-block"
+            type="submit">Sign up</button>
+    </form>
+</div>

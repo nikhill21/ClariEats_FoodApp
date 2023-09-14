@@ -1,0 +1,162 @@
+package com.org.foodapp.service;
+
+import java.util.List;
+import java.util.Optional;
+
+// import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
+import com.org.foodapp.dao.UserDao;
+import com.org.foodapp.dto.Menu;
+import com.org.foodapp.dto.User;
+import com.org.foodapp.util.ResponseStructure;
+
+@Service
+public class UserService {
+	
+	@Autowired
+	UserDao userDao;
+	
+	public ResponseEntity<ResponseStructure<User>> saveUser(User user){
+		ResponseStructure<User> responseStructure = new ResponseStructure<>();
+		responseStructure.setError(false);
+		responseStructure.setMessage(user.getName() + "saved");
+		responseStructure.setData(userDao.saveUser(user));
+		
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+	}
+	
+	public ResponseEntity<ResponseStructure<User>> getUserById(int id){
+		ResponseStructure<User> responseStructure = new ResponseStructure<>();
+		Optional<User> optional = userDao.getUserById(id);
+		if(optional.isEmpty()) {
+			System.out.println("No such id is found");
+		}
+		else {
+			responseStructure.setError(false);
+			responseStructure.setMessage("User Found");
+			responseStructure.setData(optional.get());
+		}
+		
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+	}
+	public ResponseEntity<ResponseStructure<List<User>>> getAllStaffs(){
+		ResponseStructure<List<User>> responseStructure = new ResponseStructure<>();
+			responseStructure.setError(false);
+			responseStructure.setMessage("User Found");
+			responseStructure.setData(userDao.getAllStaffs());
+		
+		return new ResponseEntity<ResponseStructure<List<User>>>(responseStructure, HttpStatus.OK);
+	}
+
+		public ResponseEntity<ResponseStructure<List<User>>> getAllManagers(){
+		ResponseStructure<List<User>> responseStructure = new ResponseStructure<>();
+			responseStructure.setError(false);
+			responseStructure.setMessage("User Found");
+			responseStructure.setData(userDao.getAllManagers());
+		
+		return new ResponseEntity<ResponseStructure<List<User>>>(responseStructure, HttpStatus.OK);
+	}
+
+
+	public ResponseEntity<ResponseStructure<User>> login(String email, String password){
+		ResponseStructure<User> responseStructure = new ResponseStructure<>();
+		User user = userDao.login(email, password);
+		if(user!=null) {
+			responseStructure.setError(false);
+			responseStructure.setMessage("Login Successful");
+			responseStructure.setData(user);
+		}else {
+			responseStructure.setError(true);
+			responseStructure.setMessage("Invalid credentials");
+			responseStructure.setData(user);
+		}
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+	}
+	
+
+	public ResponseEntity<ResponseStructure<User>> updateUser(int id, User user) {
+		User existingUser = userDao.getUserById(id).get();
+		BeanUtils.copyProperties(user, existingUser, "id", "password" ,"role", "menu");
+		ResponseStructure<User> responseStructure = new ResponseStructure<>();
+		responseStructure.setError(true);
+		responseStructure.setMessage("user updated");
+		responseStructure.setData(userDao.saveUser(existingUser));
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure,HttpStatus.OK);
+	}
+
+	
+	public ResponseEntity<ResponseStructure<User>> updateUser(User user){	
+		ResponseStructure<User> responseStructure = new ResponseStructure<>();
+		int existingUserId = user.getId();
+		User existingUser = userDao.getUserById(existingUserId).get();
+		
+		Menu menu = existingUser.getMenu();
+		    user.setMenu(menu);
+			responseStructure.setError(false);
+			responseStructure.setMessage("Updated Successfully");
+			responseStructure.setData(userDao.updateUser(user));
+		return new ResponseEntity<ResponseStructure<User>>(responseStructure, HttpStatus.OK);
+	}
+
+// 	public ResponseEntity<ResponseStructure<User>> updateUser(User user) {
+// 		int existingUser = user.getId();
+// 		if(user!=null) {
+// //			Employee employee2 = new Employee();
+// //			((ResponseEntity<ResponseStructure<Employee>>) existingEmployee).setEmployeeName(employee.getEmployeeName());
+// //			existingEmployee.setEmployeeDesignation(employee.getEmployeeDesignation());
+// //			existingEmployee.setEmployeeSalary(employee.getEmployeeSalary());
+// //			saveEmployee(existingEmployee);
+// 			ResponseStructure<User> responseStructure = new ResponseStructure<>();
+// 			// responseStructure.setStatus(HttpStatus.FOUND.value());
+// 			responseStructure.setMessage("User Updated");
+// 			responseStructure.setData(userDao.updateUser(user));
+// 			return new ResponseEntity<>(responseStructure,HttpStatus.OK);
+// 		}
+// 		ResponseStructure<User> responseStructure = new ResponseStructure<>();
+// 		// responseStructure.setStatus(HttpStatus.BAD_REQUEST.value());
+// 		responseStructure.setMessage("USer not found");
+// 		responseStructure.setData(null);
+// 		return new ResponseEntity<>(responseStructure,HttpStatus.BAD_REQUEST);
+// 	}
+
+// public ResponseEntity<ResponseStructure<User>> updateUser(User user){	
+// 	ResponseStructure<User> structure = new ResponseStructure<>();
+// 	int existingUserId = user.getId();
+// 	User existingUser = userDao.getUserById(existingUserId).get();
+// //		Menu menu = existingUser.getMenu();
+// //		    user.setMenu(menu);
+// //			structure.setError(false);
+// //			structure.setMessage("Updated Successfully");
+// //			structure.setData(userDao.updateUser(user));
+
+// 	if(existingUser.getRole().equals("Manager")) {
+// 		Menu menu = existingUser.getMenu();
+// 		user.setMenu(menu);
+// 	}
+// 	structure.setError(false);
+// 	structure.setMessage("User updated");
+// 	structure.setData(userDao.updateUser(user));
+// 	return new ResponseEntity<ResponseStructure<User>>(structure, HttpStatus.OK);
+// }
+
+
+	public ResponseEntity<ResponseStructure<String>> deleteUser(int id){
+		ResponseStructure<String> responseStructure = new ResponseStructure<>();
+		Optional<User> optional = userDao.getUserById(id);
+		if(optional.isEmpty()) {
+			responseStructure.setError(true);
+			responseStructure.setMessage("No user with that id");
+		}else {
+			responseStructure.setError(false);
+			responseStructure.setMessage("User Deleted");
+			userDao.deleteUser(optional.get());
+		}
+		return new ResponseEntity<ResponseStructure<String>>(responseStructure, HttpStatus.OK);
+	}
+	
+
+}

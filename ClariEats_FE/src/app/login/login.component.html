@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  
+  <a class="navbar-brand" style="font-family: Arial, Helvetica, sans-serif; font-size: 6rem; font-weight: bold;" href="#"><span style="color: aliceblue;">Clari</span><span style="color: #4000ff;">Eats</span></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <button class="reg btn btn-primary" (click)="register()">Register</button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+    </ul>
+  </div>
+</nav>
+
+<div  class="row align-items-center col-lg-8 col-xl-4;" style=" margin-top: -150px; grid-template-columns: 0.5fr 0.5fr; margin-left: 250px;">
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form-signin"
+    style="min-width: 60%; max-width: 60%; margin: 12vh auto 0px;">
+    <img src="../../assets/images/logo_rm.png" style="height: 300px; width: 550px; padding-left: 15%;" alt="Logo Image">
+    <br>
+    <br>
+    <label for="inputEmail" class="sr-only">Email</label>
+    <input style="margin-bottom: 10px; height: 45px;" name="email" #email="ngModel" ngModel type="email" id="inputEmail"
+      class="form-control" placeholder="Email address" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" required>
+    <span *ngIf="email.invalid && email.touched" style="color: red;">Invalid email</span>
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input style="margin-bottom: 10px; height: 45px;" name="password" #password="ngModel" ngModel type="password" id="inputPassword"
+      class="form-control" placeholder="Password" required>
+    <span *ngIf="password.invalid && password.touched" style="color: red;">Password required</span>
+
+    <button style=" height: 45px;" class="btn btn-primary btn-block" type="submit">Sign in</button>
+  </form>
+  <div>
+    <!-- <img style="height: 70%; width: 60%; margin-left: 60px; margin-top: 30px;" src="../../assets/images/llllll.jpg"> -->
+    <!-- <img style="height: 100%; width: 60%; margin-top: 90px;" src="../../assets/images/foodapppic.svg"> -->
+  </div>
+</div>

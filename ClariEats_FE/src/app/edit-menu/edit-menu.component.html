@@ -1,0 +1,30 @@
+<div style="margin: 0vh 8% auto;" class="container">
+    <form #addfoodproduct="ngForm" (ngSubmit)="addFoodProduct(addfoodproduct)" class="form-signin">
+      <br>
+      <br>
+      <h1 style="text-align: center;" class="h3 mb-3 font-weight-normal">Add product to menu</h1>
+      
+      <label for="inputEmail" class="sr-only">Name</label>
+      <input name="name" #name="ngModel" ngModel type="email" id="inputEmail" class="form-control" placeholder="pizza" required>
+      <span *ngIf="name.invalid && name.touched" style="color: red;">Name required</span>
+      <br>
+      <label for="inputPassword" class="sr-only">price</label>
+      <input name="price" #price="ngModel" ngModel type="text" id="inputPassword" class="form-control" placeholder="100" required>
+      <span *ngIf="price.invalid && price.touched" style="color: red;">Price required</span>
+      <br>
+      <select class="form-control" name="availability" #availability="ngModel" ngModel required [(ngModel)]="available">
+        <option value="" disabled selected><small>Choose availability</small></option>
+        <option selected>Available</option>
+      </select>
+      <span *ngIf="availability.invalid && availability.touched" style="color: red;">Select availability</span>
+      <br>
+      <select class="form-control" name="type" #type="ngModel" ngModel required>
+        <option value="" disabled selected><small>Select type</small></option>
+        <option selected>Veg</option>
+        <option>Non-veg</option>
+      </select>
+      <span *ngIf="type.invalid && type.touched" style="color: red;">Select type</span>
+     <br>
+      <button [disabled]="!addfoodproduct.valid" class="btn btn-lg btn-primary btn-block" type="submit">ADD PRODUCT</button>
+    </form>
+  </div>

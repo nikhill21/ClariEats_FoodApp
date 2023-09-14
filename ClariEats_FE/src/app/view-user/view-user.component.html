@@ -1,0 +1,23 @@
+<div class="container">
+    <h1 style="text-align: center;">Staffs</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let s of staffRes.data" style="background-color: aliceblue;">
+                <td>{{s.id}}</td>
+                <td>{{s.name}}</td>
+                <td>{{s.email}}</td>
+                <td><button class="btn btn btn-primary"  [routerLink]="['/edit-user/',s.id]">EDIT</button></td>
+                <td><button class="btn btn-secondary" (click)="deleteUser(s.id)">DELETE</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

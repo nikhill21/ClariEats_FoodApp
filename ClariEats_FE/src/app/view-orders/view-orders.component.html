@@ -1,0 +1,15 @@
+<div class="container" style="padding: 10px;">
+    <h1 style="text-align: center;">Here are your orders!!</h1>
+    <div class="list-group foodproduct" *ngFor="let f of foodOrderRes.data">
+        <a href="javascript:void(0)" class="list-group-item list-group-item-action" style="margin: 2px auto;">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{f.customerName}}</h5>
+                <!-- <button *ngIf="f.status === 'not-ready'" (click)="updateOrder(f.id)" class="btn btn-primary">Update Order</button> -->
+                <button *ngIf="f.status === 'not-ready'" (click)="updateStatus(f.id)" class="btn btn-outline-secondary">READY</button>
+            </div>
+            <span>{{f.contactNumber}}</span><br>
+            <small> &#8377;{{f.totalPrice}}</small><br>
+            <small *ngIf="f.status === 'ready'"><span><i style="color: green; margin-right: 5px;" class="fa-solid fa-square-check"></i></span>Delivered</small>
+        </a>
+    </div>
+</div>

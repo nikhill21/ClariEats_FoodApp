@@ -1,0 +1,18 @@
+<div class="navbar">
+    <button class="reg btn btn-primary" (click)="logout()">Logout</button>
+</div>
+
+<div style="display: flex; flex-direction: column; justify-content: center; text-align: center; margin: 25vh auto;"
+    class="container">
+    <h2>Hey {{staff.name}}, Good day!!</h2>
+    <div style="display: flex; justify-content: center;">
+        <div (click)="takeOrder()" class="CTAbutton">
+            <h5>Take Order</h5>
+        </div>
+        <div (click)="viewOrder()" class="CTAbutton">
+            <h5>View Orders</h5>
+        </div>
+    </div>
+
+
+</div>

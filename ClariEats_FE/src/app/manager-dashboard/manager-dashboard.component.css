@@ -1,0 +1,24 @@
+.CTAbutton {
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    height: 80px;
+    width: 150px;
+    margin: 50px 10px;
+    text-align: center;
+    box-shadow: 5px 2px 20px black;
+    background-color: rgb(97, 97, 255);
+    color: whitesmoke;
+}
+
+.CTAbutton :hover{
+    transform: scale(1.08);
+}
+
+h5 {
+    padding: 18% 5px;
+    cursor: pointer;
+}
+
+.reg{
+    margin-left: 80%;
+  }

@@ -1,0 +1,23 @@
+<div class="container">
+    <h1 style="text-align: center;">Managers</h1>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let m of ManagerRes.data" style="background-color: aliceblue;">
+                <td>{{m.id}}</td>
+                <td>{{m.name}}</td>
+                <td>{{m.email}}</td>
+                <td><button class="btn btn btn-outline-primary"  [routerLink]="['/edit-user/',m.id]">EDIT</button></td>
+                <td><button class="btn btn-secondary" (click)="deleteManager(m.id)">DELETE</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

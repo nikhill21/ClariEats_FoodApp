@@ -1,0 +1,20 @@
+.CTAbutton {
+    border: 1px solid #ccc;
+    border-radius: 30px;
+    height: 80px;
+    width: 150px;
+    margin: 50px 30px;
+    text-align: center;
+    box-shadow: 5px 2px 20px black;
+    cursor: pointer;
+    background-color: rgb(97, 97, 255);
+    color: whitesmoke;
+}
+
+h5 {
+    padding: 18% 5px;
+}
+
+.navbar{
+    margin-left: 80%;
+}

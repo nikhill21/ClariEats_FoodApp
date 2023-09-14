@@ -1,0 +1,33 @@
+<div class="navbar">
+    <button class="reg btn btn-primary" (click)="logout()">Logout</button>
+</div>
+
+<div style="display: flex; flex-direction: column; justify-content:center; text-align: center; margin: 12vh auto;"
+    class="container">
+    <h1>Hey {{admin.name}}, Good day!!</h1>
+    <div style=" justify-content: center; margin-left: 290px;">
+        <div (click)="registerManager()" class="CTAbutton">
+            <h5>Add manager</h5>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: -180px;  margin-left: 390px;">
+        <div (click)="viewManager()" class="CTAbutton">
+            <h5>View Manager</h5>
+        </div>
+    </div>
+</div>
+<div style="display: flex; flex-direction: column; justify-content:center; text-align: center; margin: 10vh auto;;"
+    class="container">
+    <div style=" justify-content: center; margin-left: 290px; margin-top: -150px; ">
+        <div (click)="registerStaff()" class="CTAbutton">
+            <h5>Add Staff</h5>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin-top: -180px;  margin-left: 390px;">
+        <div (click)="viewStaff()" class="CTAbutton">
+            <h5>View Staff</h5>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,22 @@
+<div class="container" style="padding: 10px;">
+    <div style="display: flex; justify-content:space-between;">
+        <button class="btn btn-primary" (click)="deleteMenu()">Delete Menu</button>
+        <!-- <button class="btn btn-primary" (click)="editMenu()">Edit Menu</button> -->
+        <button class="btn btn-primary" (click)="addToMenu()">Add to Menu</button>
+    </div>
+    <div class="list-group foodproduct" *ngFor = "let f of foodProducts">
+        <a href="javascript:void(0)" class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{f.name}}
+                    <span>
+                        <img *ngIf="f.type === 'Veg'" style="margin-left: 10px;" src="../../assets//icons/vegicon.png" alt="Veg" width="30" height="30">
+                        <img *ngIf="f.type === 'Non-veg'" style="margin-left: 10px;" src="../../assets/icons/nonvegicon.jpg" alt="NonVeg" width="22" height="22">&nbsp;
+                        <button class="btn btn-primary" (click)="editMenu(f.id)">Edit Menu</button>
+                    </span>
+                </h5>
+                <small (click)="deleteProduct(f.id)"><i class="fa-solid fa-trash"></i> </small>
+            </div>
+            <small> &#8377; {{f.price}}</small>
+        </a>
+    </div>
+</div>

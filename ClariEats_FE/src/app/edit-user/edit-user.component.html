@@ -1,0 +1,30 @@
+<div class="container">
+    <h3>Edit User</h3>
+    <form #edituser="ngForm" (ngSubmit)="editUser(edituser)">
+        <div class="form-group">
+            <input type="text" ngModel class="form-control" id="userid"
+                name="id" #id="ngModel" [(ngModel)]="selectedUser.data.id" disabled>
+        </div>
+        <div class="form-group">
+            <input type="text" ngModel class="form-control" id="productName"
+                name="name" #name="ngModel" [(ngModel)]="selectedUser.data.name">
+                <span *ngIf="name.invalid && name.touched" style="color: red;">Name required</span>
+        </div>
+        <div class="form-group">
+            <input type="text" ngModel class="form-control"
+                id="email" name="email" #email="ngModel" [(ngModel)]="selectedUser.data.email" required>
+                <span *ngIf="email.invalid && email.touched" style="color: red;" >Invalid email</span>
+        </div>
+        <div class="form-group">
+            <input type="password" ngModel class="form-control" id="pwd"
+                name="password" #password="ngModel" [(ngModel)]="selectedUser.data.password" required>
+                <span *ngIf="password.invalid && password.touched" style="color: red;">Password required</span>
+        </div>
+        <div class="form-group">
+            <input type="text" ngModel class="form-control" id="productPrice" required
+                name="role" #role="ngModel" [(ngModel)]="selectedUser.data.role">
+                <span *ngIf="role.invalid && role.touched" style="color: red;">Role required</span>
+        </div>
+        <button [disabled]="!edituser.valid" type="submit" class="btn btn-primary">UPDATE</button>
+    </form>
+</div>

@@ -1,0 +1,42 @@
+<div style="margin: 0vh 10% auto;" class="container">
+    <form #createorder="ngForm" (ngSubmit)="createOrder(createorder)" class="form-signin">
+        <br>
+        <br>
+        <h1 class="h3 mb-3 font-weight-normal" style=" text-align: center; font-size: xx-large;"> Create order</h1>
+
+        <label for="inputEmail" class="sr-only">Name</label>
+        <input name="customerName" #customerName="ngModel" ngModel type="name" id="inputEmail" class="form-control"
+            placeholder="Name" required>
+        <span *ngIf="customerName.invalid && customerName.touched" style="color: red;">Name required</span>
+        <br>
+        <label for="inputPassword" class="sr-only">Contact</label>
+        <input name="contactNumber" #contactNumber="ngModel" ngModel type="text" id="inputPassword" class="form-control"
+            placeholder="Contact" required>
+        <span *ngIf="contactNumber.invalid && contactNumber.touched" style="color: red;">Contact required</span>
+        <br>
+        <label for="inputPassword1" class="sr-only">Mail</label>
+        <input name="mail" #mail="ngModel" ngModel type="text" id="inputPassword1" class="form-control"
+            placeholder="Mail ID" pattern="^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$" required>
+        <span *ngIf="mail.invalid && mail.touched" style="color: red;">Invalid mail</span>
+        <br>
+        
+        <p style="margin: 1px 0; color: whitesmoke; font-size: x-large;">Choose Items:</p>
+        <div class="list-group foodproduct" *ngFor="let f of foodProductsRes.data">
+            <a href="javascript:void(0)" class="list-group-item list-group-item-action" style="margin: 1px auto">
+                <div class="d-flex w-100 justify-content-between">
+                    <p class="mb-1">{{f.name}}</p>
+                    <small> &#8377; {{f.price}}</small>
+                    <div>
+                        <button type="button" (click)="addItem(f.id,f.price)" class="quantity-inp">+</button>
+                        <button type="button" class="quantity-inp">{{itemsMap.get(f.id) || 0}}</button>
+                        <button type="button" (click)="deleteItem(f.id,f.price)" class="quantity-inp">-</button>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <p style="margin-top:10px; font-size: x-large;">Total price: <span>{{orderTotal}}</span></p>
+
+        <br>
+        <button [disabled]="!createorder.valid" class="btn btn-lg btn-primary btn-block" type="submit">ORDER</button>
+    </form>
+</div>
